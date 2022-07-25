@@ -17,7 +17,7 @@ export const githubApi = createApi({
 
                 params: { /* Query параметры */
                     q: search,
-                    per_page: 10,
+                    per_page: 15,
                 }
             }),
             transformResponse: (response: ServerResponse<IUser>) => response.items /* доп. обработка ответа сервера */
