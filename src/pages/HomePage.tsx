@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSearchUsersQuery } from '../store/github/github.api';
+import { useDebounce } from '../hooks/debounce';
 
 export const HomePage = () => {
     const [search, setSearch] = useState('');
@@ -9,11 +10,13 @@ export const HomePage = () => {
     // console.log(isLoading, isError, data)
 
 
+    const searchDeb = useDebounce(search);
+
 
 
     useEffect(() => {
-        console.log(search)
-    }, [search])
+        console.log(searchDeb)
+    }, [searchDeb])
 
 
     return (
