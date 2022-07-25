@@ -37,7 +37,6 @@ export const HomePage = () => {
 
                     {isLoading && <p className="text-center">Loading...</p>}
 
-
                     <li></li>
                 </ul>
             </div>
