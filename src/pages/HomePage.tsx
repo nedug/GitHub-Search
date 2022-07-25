@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { useSearchUsersQuery } from '../store/github/github.api';
+import { useLazyGetUserReposQuery, useSearchUsersQuery } from '../store/github/github.api';
 import { useDebounce } from '../hooks/debounce';
+import { RepoCard } from '../components/RepoCard';
 
 export const HomePage = () => {
     const [search, setSearch] = useState('');
@@ -8,11 +9,17 @@ export const HomePage = () => {
     const searchDeb = useDebounce(search);
 
     const { isLoading, isError, data } = useSearchUsersQuery(searchDeb, {
-        skip : searchDeb.length < 3, /* Запрос не будет выполняться если кол. симоволов меньше 2 */
+        skip: searchDeb.length < 3, /* Запрос не будет выполняться если кол. симоволов меньше 2 */
         refetchOnFocus: true, /* Автоматический запрос при фокусе вкладки браузера */
     });
 
-    // console.log(isLoading, isError, data)
+    const [fetchRepos, { isLoading: areReposLoading, isError: Error, data: repos }] = useLazyGetUserReposQuery();
+
+    const clickHandler = (login: string) => {
+        fetchRepos(login);
+        setDropdown(false);
+        setSearch('');
+    };
 
 
     useEffect(() => {
@@ -40,13 +47,31 @@ export const HomePage = () => {
 
                         {isLoading && <p className="text-center">Loading...</p>}
 
-                        {data?.map(({ login, id }) => (
-                            <li key={id}
-                                className="py-2 px-4 hover:bg-gray-500 hover:text-white transition-colors cursor-pointer"
-                            >{login}</li>
+                        {data?.map(({ login, id, avatar_url }) => (
+
+                            <li
+                                key={id}
+                                onClick={() => clickHandler(login)}
+                                className="relative py-3 px-4 hover:bg-gray-500 hover:text-white transition-colors cursor-pointer"
+                            >
+                                {login}
+                                <img
+                                    className="absolute top-2 right-5"
+                                    src={avatar_url}
+                                    alt=""
+                                    height="35px"
+                                    width="35p"
+                                />
+                            </li>
                         ))}
                     </ul>
                 }
+
+                <div className="container">
+                    {areReposLoading && <p className="text-center">Repos are loading...</p>}
+
+                    {repos?.map(repo => <RepoCard key={repo.id} repo={repo} />)}
+                </div>
             </div>
         </div>
     );

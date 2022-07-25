@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react';
-import { IUser, ServerResponse } from '../../models/models';
+import { Irepo, IUser, ServerResponse } from '../../models/models';
 
 
 // Настраиваем API (которая автоматически генерирует хуки React для каждого определенного запроса и мутации endpoints)
@@ -24,8 +24,16 @@ export const githubApi = createApi({
             }),
             transformResponse: (response: ServerResponse<IUser>) => response.items /* доп. обработка ответа сервера */
         }),
+
+        getUserRepos: builder.query<Irepo[], string>({
+            query: (login: string) => ({
+                url: `users/${login}/repos`,
+            }),
+        }),
     }),
 });
 
+
 // Автоматические Хуки для запросов на API
-export const { useSearchUsersQuery } = githubApi;
+/* Lazy позволяет сделать запрос не сразу а в нужный момент */
+export const { useSearchUsersQuery, useLazyGetUserReposQuery } = githubApi;
