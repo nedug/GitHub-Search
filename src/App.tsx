@@ -2,7 +2,7 @@ import React from 'react';
 
 function App() {
     return (
-        <h1 className="font-bold">Hello React</h1>
+        <h1 className="font-bold underline">Hello React</h1>
     );
 }
 
