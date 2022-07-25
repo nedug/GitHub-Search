@@ -8,7 +8,8 @@ export const HomePage = () => {
     const searchDeb = useDebounce(search);
 
     const { isLoading, isError, data } = useSearchUsersQuery(searchDeb, {
-        skip : searchDeb.length < 3 /* Запрос не будет выполняться если кол. симоволов меньше 2 */
+        skip : searchDeb.length < 3, /* Запрос не будет выполняться если кол. симоволов меньше 2 */
+        refetchOnFocus: true, /* Автоматический запрос при фокусе вкладки браузера */
     });
 
     // console.log(isLoading, isError, data)

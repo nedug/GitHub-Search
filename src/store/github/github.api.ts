@@ -10,6 +10,8 @@ export const githubApi = createApi({
         baseUrl: 'https://api.github.com', /* Основной URL */
     }),
 
+    refetchOnFocus: true, /* Автоматический запрос при фокусе вкладки браузера */
+
     endpoints: (builder) => ({
         searchUsers: builder.query<IUser[], string>({
             query: (search: string) => ({
