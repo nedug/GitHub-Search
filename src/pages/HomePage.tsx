@@ -5,13 +5,13 @@ import { useDebounce } from '../hooks/debounce';
 export const HomePage = () => {
     const [search, setSearch] = useState('');
 
-    const { isLoading, isError, data } = useSearchUsersQuery('nedug');
-
-    // console.log(isLoading, isError, data)
-
-
     const searchDeb = useDebounce(search);
 
+    const { isLoading, isError, data } = useSearchUsersQuery(searchDeb, {
+        skip: searchDeb.length < 3 /* Запрос не будет выполняться если кол. симоволов меньше 2 */
+    });
+
+    // console.log(isLoading, isError, data)
 
 
     useEffect(() => {
@@ -33,9 +33,13 @@ export const HomePage = () => {
                     onChange={(e) => setSearch(e.target.value)}
                 />
 
-                <div className="absolute top-[42px] left-0 right-0 max-h-[200px] shadow-md bg-white">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet, voluptatum.
-                </div>
+                <ul className="absolute list-none top-[42px] left-0 right-0 max-h-[200px] shadow-md bg-white">
+
+                    {isLoading && <p className="text-center">Loading...</p>}
+
+
+                    <li></li>
+                </ul>
             </div>
 
 
