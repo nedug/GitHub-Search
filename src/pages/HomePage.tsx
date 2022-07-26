@@ -25,11 +25,11 @@ export const HomePage = () => {
         setDropdown(searchDeb.length > 2 && data?.length! > 0)
     }, [searchDeb, data]);
 
+    if (isError) return <p className="text-center text-red-600 mt-2">Something went wrong... Reload page</p>;
 
     return (
         <div className="flex justify-center pt-10 mx-auto">
 
-            {isError && <p className="text-center text-red-600">Something went wrong...</p>}
 
             <div className="relative w-[560px]">
                 <input
