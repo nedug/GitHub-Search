@@ -16,7 +16,7 @@ export const FavouritesPages = () => {
         favourites.length > 0
             ?
             <>
-                {favourites?.map(fav => {
+                {favourites.map(fav => {
                     return <a key={fav} href={fav} target="_blank">
                         <div
                             className="relative border border-gray-300 py-3 px-3 rounded mt-2 mr-2 ml-2 hover:shadow-md hover:bg-gray-200 transition-all">
