@@ -14,4 +14,4 @@ React, Redux Toolkit Query, TypeScript, Tailwind, react-router-dom
 
 ***
 
-![](https://github.com/nedug/cv-alexander-r/blob/main/src/common/img/github.jpg?raw=true)
+![](https://github.com/nedug/cv-alexander-r/blob/main/src/common/img/github1.jpg?raw=true)
