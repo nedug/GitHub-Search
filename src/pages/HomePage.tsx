@@ -21,21 +21,20 @@ export const HomePage = () => {
         setSearch('');
     };
 
-
     useEffect(() => {
         setDropdown(searchDeb.length > 2 && data?.length! > 0)
     }, [searchDeb, data]);
 
 
     return (
-        <div className="flex justify-center pt-10 mx-auto h-screen">
+        <div className="flex justify-center pt-10 mx-auto">
 
             {isError && <p className="text-center text-red-600">Something went wrong...</p>}
 
             <div className="relative w-[560px]">
                 <input
                     type="text"
-                    className="border px-4 py-2 w-full h-[42px] mb-2"
+                    className="border border-gray-300 rounded px-4 py-2 w-full h-[42px] mb-2"
                     placeholder="Search for GitGub username..."
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
@@ -52,13 +51,13 @@ export const HomePage = () => {
                             <li
                                 key={id}
                                 onClick={() => clickHandler(login)}
-                                className="relative py-3 px-4 hover:bg-gray-500 hover:text-white transition-colors cursor-pointer"
+                                className="relative py-3 px-4 rounded hover:bg-gray-500 hover:text-white transition-colors cursor-pointer"
                             >
                                 {login}
                                 <img
                                     className="absolute top-2 right-5"
                                     src={avatar_url}
-                                    alt=""
+                                    alt="avatar"
                                     height="35px"
                                     width="35p"
                                 />
@@ -68,9 +67,16 @@ export const HomePage = () => {
                 }
 
                 <div className="container">
-                    {areReposLoading && <p className="text-center">Repos are loading...</p>}
-
-                    {repos?.map(repo => <RepoCard key={repo.id} repo={repo} />)}
+                    {areReposLoading
+                        ?
+                        <p className="text-center">Repos are loading...</p>
+                        :
+                        repos?.length === 0
+                            ?
+                            <p className="text-center text-red-600">Repos not found... try again</p>
+                            :
+                            repos?.map(repo => <RepoCard key={repo.id} repo={repo} />)
+                    }
                 </div>
             </div>
         </div>
