@@ -1,14 +1,22 @@
 import React from 'react';
 import { Irepo } from '../models/models';
 import { useActions } from '../hooks/actions';
+import { useAppSelector } from '../hooks/selector';
 
 export const RepoCard = ({ repo }: { repo: Irepo }) => {
+
+    const favourites = useAppSelector(state => state.github.favourites);
 
     const { addFavourites, removeFavourites } = useActions();
 
     const addFavourite = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         addFavourites(repo.html_url);
+    };
+
+    const removeFavourite = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
+        removeFavourites(repo.html_url);
     };
 
     return (
@@ -21,12 +29,23 @@ export const RepoCard = ({ repo }: { repo: Irepo }) => {
                 </p>
                 <p className="text-sm font-thin mt-2">{repo?.description}</p>
 
-                <button
-                    className="py-1 px-3 mt-3 bg-yellow-300 rounded hover:shadow-md transition-all"
-                    onClick={addFavourite}
-                >
-                    Add
-                </button>
+                {favourites.includes(repo.html_url)
+                    ?
+                    <button
+                        className="py-1 px-3 mt-3 bg-red-300 rounded hover:shadow-md transition-all"
+                        onClick={removeFavourite}
+                    >
+                        remove
+                    </button>
+                    :
+                    <button
+                        className="py-1 px-3 mt-3 bg-yellow-300 rounded hover:shadow-md transition-all"
+                        onClick={addFavourite}
+                    >
+                        Add
+                    </button>
+                }
+
             </a>
 
         </div>

@@ -73,7 +73,7 @@ export const HomePage = () => {
                         :
                         repos?.length === 0
                             ?
-                            <p className="text-center text-red-600">Repos not found... try again</p>
+                            <p className="text-center text-red-600 mt-2">Repos not found... try again</p>
                             :
                             repos?.map(repo => <RepoCard key={repo.id} repo={repo} />)
                     }
