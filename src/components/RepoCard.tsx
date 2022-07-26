@@ -1,10 +1,14 @@
 import React from 'react';
 import { Irepo } from '../models/models';
+import { useActions } from '../hooks/actions';
 
 export const RepoCard = ({ repo }: { repo: Irepo }) => {
 
-    const addFavourite = () => {
+    const { addFavourites, removeFavourites } = useActions();
 
+    const addFavourite = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
+        addFavourites(repo.html_url);
     };
 
     return (
