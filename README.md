@@ -5,7 +5,7 @@
 ```
 Technologies and libraries in development:
 
-React, Redux Toolkit Query, TypeScript, Tailwind, react-router-dom, Debounce
+React, Redux Toolkit Query, TypeScript, Tailwind, React-router-dom, Debounce
 ```
 
 ***
