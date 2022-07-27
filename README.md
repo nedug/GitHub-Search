@@ -1,11 +1,22 @@
-## React searching repos on GitHub
+# React searching repos on GitHub
+
+***
+
+* search GitHub repositories by username (+debounce)
+* display list of repositories
+* add/remove favorites
+* saving data to localStorage
 
 ***
 
 ```
 Technologies and libraries in development:
-
-React, Redux Toolkit Query, TypeScript, Tailwind, React-router-dom, Debounce
+- React
+- TypeScript
+- Redux Toolkit Query
+- Tailwind
+- React-router-dom
+- Debounce
 ```
 
 ***
